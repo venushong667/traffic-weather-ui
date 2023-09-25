@@ -4,6 +4,7 @@ import React from 'react'
 import { DatePicker } from '@/components/date-picker'
 import { ModeToggle } from '@/components/modeToggle'
 import TrafficContent from './traffic/TrafficContent'
+import { Button } from '@/components/ui/button'
 
 
 export default function Home() {
@@ -18,6 +19,7 @@ export default function Home() {
             <div id="traffic" className="flex flex-col w-3/4 gap-7 p-3">
                 <div id="top-bar" className="flex gap-3">
                     <DatePicker date={date} setDate={handleDateChange}></DatePicker>
+                    <Button onClick={() => setDate(new Date())}>Right Now!</Button>
                     <div className="ml-auto">
                         <ModeToggle />
                     </div>
