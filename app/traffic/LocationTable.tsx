@@ -83,6 +83,7 @@ export default function LocationTable( { date, selectedLocation, selectLocation 
                 initialTableState={{ pagination: { pageSize: 5 } }}
                 onSelectRow={onSelectRow}
                 enableSetPageSize={false}
+                enableViewOptions={false}
             />
         </div>
     )

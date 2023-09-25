@@ -49,6 +49,7 @@ interface DataTableProps<TData, TValue> {
     enableRowSelection?: boolean,
     enableMultiRowSelection?: boolean,
     enableSetPageSize?: boolean,
+    enableViewOptions?: boolean,
     onSelectRow?: (row: Row<TData>) => void,
 }
 
@@ -60,6 +61,7 @@ export function DataTable<TData, TValue>({
     enableRowSelection = true,
     enableMultiRowSelection = false,
     enableSetPageSize = true,
+    enableViewOptions = true,
     onSelectRow = () => {},
 }: DataTableProps<TData, TValue>) {
     const [rowSelection, setRowSelection] = React.useState({})
@@ -99,6 +101,7 @@ export function DataTable<TData, TValue>({
             <DataTableToolbar
                 table={table}
                 searchPlaceholder={searchPlaceholder}
+                enableViewOptions={enableViewOptions}
             />
             <div className="rounded-md border">
                 <Table>
