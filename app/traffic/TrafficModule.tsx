@@ -23,11 +23,11 @@ export interface Traffic {
     timestamp: string
 }
 
-interface TrafficContentProps {
+interface TrafficModuleProps {
     date: Date,
 }
 
-export default function TrafficModule({ date }: TrafficContentProps) {
+export default function TrafficModule({ date }: TrafficModuleProps) {
     const [selectedLocation, selectLocation] = useState<Traffic>()
 
     return (
