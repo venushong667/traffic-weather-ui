@@ -54,6 +54,12 @@ export function DatePicker({
     const units = ["AM", "PM"];
 
     const [selectedDateTime, setSelectedDateTime] = React.useState<DateTime | undefined>(date ? DateTime.fromJSDate(date) : undefined);
+
+    React.useEffect(() => {
+        if (!date) return
+
+        setSelectedDateTime(DateTime.fromJSDate(date))
+    }, [date])
     
     const handleDateSelect: SelectSingleEventHandler = (day, selected) => {
         const selectedDay = DateTime.fromJSDate(selected);

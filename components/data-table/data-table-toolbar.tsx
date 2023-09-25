@@ -63,7 +63,7 @@ export function DataTableToolbar<TData>({
                     </Button>
                 )}
             </div>
-            {enableViewOptions ?? <DataTableViewOptions table={table} />}
+            {enableViewOptions && <DataTableViewOptions table={table} />}
         </div>
     )
 }
