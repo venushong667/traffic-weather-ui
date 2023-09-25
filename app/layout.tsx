@@ -28,8 +28,8 @@ export default function RootLayout({
                     enableSystem
                     disableTransitionOnChange
                 >
-                    <div id="root" style={{ height: '100vh', width: '100vw', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-                        <div id='content' style={{ height: '100%', width: '100%', overflow: 'hidden' }}>
+                    <div id="root" className="h-screen w-screen overflow-hidden p-1">
+                        <div className="overflow-hidden h-full w-full p-1">
                             { children }
                         </div>
                         <ModeToggle />
