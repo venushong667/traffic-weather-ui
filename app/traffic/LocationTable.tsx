@@ -1,58 +1,57 @@
 'use client'
 
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import Image, { ImageLoaderProps } from "next/image"
 
 import { ColumnDef, Row } from "@tanstack/react-table";
 import { getTraffic } from "../service";
 import { DataTable } from "@/components/data-table";
+import { DataTableColumnHeader } from "@/components/data-table/data-table-column-header";
+import { Traffic } from "./TrafficContent";
 
 
-const columns: ColumnDef<any>[] = [
+const columns: ColumnDef<Traffic>[] = [
     {
         accessorKey: "address",
-        header: "Address",
+        header: ({ column }) => (
+            <DataTableColumnHeader column={column} title="Address" hide={false} />
+        ),
         meta: { search: true }
     },
     {
         accessorKey: "route",
-        header: "Route",
+        header: ({ column }) => (
+            <DataTableColumnHeader column={column} title="Route" hide={false} />
+        ),
+        meta: { search: true }
+    },
+    {
+        accessorKey: "neighborhood",
+        header: ({ column }) => (
+            <DataTableColumnHeader column={column} title="Area" hide={false} />
+        ),
+        cell: ({ row }) => <div className="w-full max-w-[150px] truncate">{row.getValue("neighborhood")}</div>,
         meta: { filter: true }
     },
     {
         accessorKey: "region",
-        header: "Region",
+        header: ({ column }) => (
+            <DataTableColumnHeader column={column} title="Region" hide={false} />
+        ),
+        cell: ({ row }) => {
+            const value = row.getValue<string>("region")
+            return <div className="w-[40px]">{ value.substring(0 ,1).toUpperCase() + value.substring(1) }</div>
+        },
         meta: { filter: true }
     },
 ]
 
-interface ImageMetadata {
-    height: number,
-    width: number,
-    md5: string
-}
-
-interface Traffic {
-    id: string,
-    address: string,
-    route: string,
-    neighborhood: string,
-    region: string,
-    image: {
-        url: string,
-        metadata: ImageMetadata
-    },
-    timestamp: string
-}
-
 interface LocationTableProps {
-    date: Date
+    date: Date,
+    selectLocation: React.Dispatch<React.SetStateAction<Traffic | undefined>>
 }
 
-export default function LocationTable( { date }: LocationTableProps) {
+export default function LocationTable( { date, selectLocation }: LocationTableProps) {
     const [traffic, setTraffic] = useState<Traffic[]>([])
-    const [selectedLoc, selectLoc] = useState<Traffic>()
 
     useEffect(() => {
         handleDateChange(date)
@@ -62,34 +61,20 @@ export default function LocationTable( { date }: LocationTableProps) {
         const data = await getTraffic(date)
         setTraffic(data)
     }
-    
-    const imageLoader = ({ src, width, quality }: ImageLoaderProps) => {
-        return selectedLoc?.image.url ?? "/image-placeholder.jpg"
+
+    const onSelectRow = (row: Row<Traffic>) => {
+        selectLocation(row.original)
     }
 
     return (
-        <>
-            <div id="location-list">
-                <DataTable
-                    columns={columns}
-                    data={traffic}
-                    initialTableState={{ pagination: { pageSize: 5 } }}
-                />
-            </div>
-            <div className="h-[500px] flex justify-center items-center overflow-hidden">
-                <Image
-                    loader={imageLoader}
-                    src="/image-placeholder.jpg"
-                    alt=""
-                    width="800"
-                    height="100"
-                ></Image>
-            </div>
-        </>
-
+        <div id="location-list" className="bg-slate-50 dark:bg-slate-900 rounded-lg p-8">
+            <DataTable
+                columns={columns}
+                data={traffic}
+                initialTableState={{ pagination: { pageSize: 5 } }}
+                onSelectRow={onSelectRow}
+                enableSetPageSize={false}
+            />
+        </div>
     )
 }
-
-LocationTable.propTypes = {
-    date: PropTypes.instanceOf(Date)
-};
