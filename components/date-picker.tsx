@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils"
 import PropTypes from "prop-types";
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Calendar, CalendarProps } from "@/components/ui/calendar"
+import { Calendar } from "@/components/ui/calendar"
 import {
     Popover,
     PopoverContent,
@@ -19,14 +19,14 @@ import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuGroup,
-    DropdownMenuItem, DropdownMenuShortcut, DropdownMenuTrigger
+    DropdownMenuItem, DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu"
 import { SelectSingleEventHandler } from "react-day-picker"
 import { ScrollArea } from "@/components/ui/scroll-area"
 
 interface DatePickerProps {
     date: Date | undefined,
-    setDate: (date: Date | undefined) => void
+    setDate: (date: Date) => void
 }
 
 interface Time {
