@@ -2,7 +2,8 @@
 
 import React from 'react'
 import { DatePicker } from '@/components/date-picker'
-import LocationTable from './traffic/LocationTable'
+import { ModeToggle } from '@/components/modeToggle'
+import TrafficContent from './traffic/TrafficContent'
 
 
 export default function Home() {
@@ -13,13 +14,16 @@ export default function Home() {
     }
 
     return (
-        <main className="flex justify-between p-5 gap-5 overflow-hidden">
-            <div id="traffic" className="flex flex-col w-3/4 gap-10">
+        <main className="flex justify-between gap-5 overflow-hidden h-full">
+            <div id="traffic" className="flex flex-col w-3/4 gap-7 p-3">
                 <div id="top-bar" className="flex gap-3">
                     <DatePicker date={date} setDate={handleDateChange}></DatePicker>
+                    <div className="ml-auto">
+                        <ModeToggle />
+                    </div>
                 </div>
 
-                <LocationTable date={date} />
+                <TrafficContent date={date} />
             </div>
             <div id="weather" className="w-1/4 shadow rounded-lg">
                 <div>weather</div>
