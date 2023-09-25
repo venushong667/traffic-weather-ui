@@ -43,6 +43,13 @@ const columns: ColumnDef<Traffic>[] = [
         },
         meta: { filter: true }
     },
+    {
+        accessorKey: "timestamp",
+        header: ({ column }) => (
+            <DataTableColumnHeader column={column} title="Updated at" hide={false} />
+        ),
+        cell: ({ row }) => <div className="w-[100px] max-w-[100px]">{new Date(row.getValue<string>("timestamp")).toLocaleTimeString()}</div>,
+    },
 ]
 
 interface LocationTableProps {
