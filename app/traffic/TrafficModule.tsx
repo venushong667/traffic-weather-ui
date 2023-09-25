@@ -25,10 +25,11 @@ export interface Traffic {
 
 interface TrafficModuleProps {
     date: Date,
+    selectedLocation: Traffic | undefined,
+    selectLocation: React.Dispatch<React.SetStateAction<Traffic | undefined>>
 }
 
-export default function TrafficModule({ date }: TrafficModuleProps) {
-    const [selectedLocation, selectLocation] = useState<Traffic>()
+export default function TrafficModule({ date, selectedLocation, selectLocation }: TrafficModuleProps) {
 
     return (
         <>

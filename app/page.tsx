@@ -1,14 +1,16 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import { DatePicker } from '@/components/date-picker'
 import { ModeToggle } from '@/components/modeToggle'
-import TrafficModule from './traffic/TrafficModule'
+import TrafficModule, { Traffic } from './traffic/TrafficModule'
 import { Button } from '@/components/ui/button'
+import WeatherModule from './weather/WeatherModule'
 
 
 export default function Home() {
-    const [date, setDate] = React.useState<Date>(new Date())
+    const [date, setDate] = useState<Date>(new Date())
+    const [selectedLocation, selectLocation] = useState<Traffic>()
 
     async function handleDateChange (date: Date) {
         setDate(date)
@@ -25,10 +27,10 @@ export default function Home() {
                     </div>
                 </div>
 
-                <TrafficModule date={date} />
+                <TrafficModule date={date} selectedLocation={selectedLocation} selectLocation={selectLocation} />
             </div>
-            <div id="weather" className="w-1/4 shadow rounded-lg">
-                <div>weather</div>
+            <div id="weather" className="w-1/4 shadow">
+                <WeatherModule date={date} selectedLocation={selectedLocation} />
             </div>
 
         </main>
