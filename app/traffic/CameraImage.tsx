@@ -1,6 +1,6 @@
 import React from "react";
 import Image, { ImageLoaderProps } from "next/image"
-import { Traffic } from "./TrafficContent";
+import { Traffic } from "./TrafficModule";
 
 interface CameraImageProps {
     selectedLocation: Traffic | undefined

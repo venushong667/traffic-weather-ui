@@ -3,7 +3,7 @@
 import React from 'react'
 import { DatePicker } from '@/components/date-picker'
 import { ModeToggle } from '@/components/modeToggle'
-import TrafficContent from './traffic/TrafficContent'
+import TrafficModule from './traffic/TrafficModule'
 import { Button } from '@/components/ui/button'
 
 
@@ -25,7 +25,7 @@ export default function Home() {
                     </div>
                 </div>
 
-                <TrafficContent date={date} />
+                <TrafficModule date={date} />
             </div>
             <div id="weather" className="w-1/4 shadow rounded-lg">
                 <div>weather</div>
