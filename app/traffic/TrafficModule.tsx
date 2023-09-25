@@ -27,12 +27,16 @@ interface TrafficContentProps {
     date: Date,
 }
 
-export default function TrafficContent({ date }: TrafficContentProps) {
+export default function TrafficModule({ date }: TrafficContentProps) {
     const [selectedLocation, selectLocation] = useState<Traffic>()
 
     return (
         <>
-            <LocationTable date={date} selectLocation={selectLocation}/>
+            <LocationTable
+                date={date}
+                selectedLocation={selectedLocation}
+                selectLocation={selectLocation}
+            />
             <CameraImage selectedLocation={selectedLocation}/>
         </>
     )

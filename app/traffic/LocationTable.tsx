@@ -3,10 +3,10 @@
 import React, { useEffect, useState } from "react";
 
 import { ColumnDef, Row } from "@tanstack/react-table";
-import { getTraffic } from "../service";
+import { getTraffic } from "./service";
 import { DataTable } from "@/components/data-table";
 import { DataTableColumnHeader } from "@/components/data-table/data-table-column-header";
-import { Traffic } from "./TrafficContent";
+import { Traffic } from "./TrafficModule";
 
 
 const columns: ColumnDef<Traffic>[] = [
@@ -54,15 +54,17 @@ const columns: ColumnDef<Traffic>[] = [
 
 interface LocationTableProps {
     date: Date,
+    selectedLocation: Traffic | undefined,
     selectLocation: React.Dispatch<React.SetStateAction<Traffic | undefined>>
 }
 
-export default function LocationTable( { date, selectLocation }: LocationTableProps) {
+export default function LocationTable( { date, selectedLocation, selectLocation }: LocationTableProps) {
     const [traffic, setTraffic] = useState<Traffic[]>([])
 
     useEffect(() => {
         handleDateChange(date)
-    }, [date])
+        selectLocation(undefined)
+    }, [date, selectLocation])
 
     async function handleDateChange(date: Date) {
         const data = await getTraffic(date)
