@@ -1,29 +1,16 @@
 import { formatDate } from "@/lib/utils";
 import { Traffic } from "../traffic/TrafficModule";
 import Image from "next/image"
-import { Compass, Droplets, LucideProps, Thermometer, Wind, icons } from "lucide-react";
+import { Compass, Droplets, Thermometer, Wind } from "lucide-react";
 import { useEffect, useState } from "react";
 import { getWeatherForecasts } from "./service";
 import { getWeatherIconPath, removeDayNight } from "./utils";
-
-
+import { Observation } from "./interface";
 
 interface TodayForecast {
-    update_timestamp: string,
-    timestamp: string,
     valid_period: { start: string, end: string }
-    general: GeneralForecast,
+    general: Observation,
     periods: Period[]
-}
-
-interface GeneralForecast {
-    forecast: string,
-    relative_humidity: { low: number, high: number },
-    temperature: { low: number, high: number },
-    wind: { 
-        speed: { low: number, high: number },
-        direction: string
-    },
 }
 
 interface Period {

@@ -83,6 +83,8 @@ export function DataList<TData, TValue>({
         enableRowSelection: enableRowSelection,
         enableMultiRowSelection: enableMultiRowSelection,
         onRowSelectionChange: setRowSelection,
+        onSortingChange: setSorting,
+        onColumnFiltersChange: setColumnFilters,
         getCoreRowModel: getCoreRowModel(),
         getFilteredRowModel: getFilteredRowModel(),
         getSortedRowModel: getSortedRowModel(),
