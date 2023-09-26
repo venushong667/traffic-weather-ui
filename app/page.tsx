@@ -17,8 +17,8 @@ export default function Home() {
     }
 
     return (
-        <main className="flex justify-between gap-5 overflow-hidden h-full">
-            <div id="traffic" className="flex flex-col w-3/4 gap-7 p-3">
+        <main className="flex justify-between gap-5 overflow-hidden 2xl:overflow-auto h-full">
+            <div id="traffic" className="flex flex-col w-3/4 gap-7 p-3 2xl:overflow-x-auto">
                 <div id="top-bar" className="flex gap-3">
                     <DatePicker date={date} setDate={handleDateChange}></DatePicker>
                     <Button onClick={() => setDate(new Date())}>Right Now!</Button>
@@ -29,7 +29,7 @@ export default function Home() {
 
                 <TrafficModule date={date} selectedLocation={selectedLocation} selectLocation={selectLocation} />
             </div>
-            <div id="weather" className="w-1/4 shadow">
+            <div id="weather" className="w-1/4 shadow overflow-y-auto">
                 <WeatherModule date={date} selectedLocation={selectedLocation} />
             </div>
 

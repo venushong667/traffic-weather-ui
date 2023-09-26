@@ -1,4 +1,4 @@
-import { DateTime } from 'luxon';
+import { formatDate } from '@/lib/utils';
 
 export type Duration = '2-hour' | '24-hour' | '4-day'
 
@@ -6,11 +6,12 @@ export const getWeatherForecasts = async (duration: Duration = '2-hour', datetim
     try {
         let query = '?' + new URLSearchParams({ duration: duration })
         if (datetime) {
-            const dt = DateTime.fromJSDate(datetime).toFormat("yyyy-MM-dd'T'HH:mm:ss");
+            const dt = formatDate(datetime, "yyyy-MM-dd'T'HH:mm:ss");
             query += '&' + new URLSearchParams({ date_time: dt })
         }
         if (date) {
-            const d = DateTime.fromJSDate(date).toFormat("yyyy-MM-dd");
+            const d = formatDate(date, "yyyy-MM-dd");
+            formatDate
             query += '&' + new URLSearchParams({ date: d })
         } 
 

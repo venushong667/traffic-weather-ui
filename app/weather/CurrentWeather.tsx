@@ -3,6 +3,7 @@ import { getWeatherForecasts } from "./service"
 import { Traffic } from "../traffic/TrafficModule"
 import Image from "next/image"
 import { formatDate } from "@/lib/utils"
+import { getWeatherIconPath, removeDayNight } from "./utils"
 
 
 interface HourlyForecast {
@@ -38,7 +39,6 @@ export default function CurrentWeather({ date, selectedLocation }: CurrentWeathe
     async function getHourlyForecasts(date: Date) {
         const data = (await getWeatherForecasts('2-hour', date))
         if (data) {
-            console.log(data[0])
             setHourlyForecasts(data[0])
         }
     }
@@ -52,21 +52,26 @@ export default function CurrentWeather({ date, selectedLocation }: CurrentWeathe
 
     return (
         <>
-            <div id="current-weather" className="p-5 flex flex-col w-full gap-1">
-                <div className="text-xl font-semibold">Weather Now</div>
+            <div id="current-weather" className="pt-3 px-5 flex flex-col w-full gap-1">
+                <div className="text-base font-semibold">Now</div>
                 
                 {selectedForecast && hourlyForecasts && 
                     <>
-                        <div>{formatDate(new Date())}</div>
-                        <div>{selectedForecast.area}</div>
-                        <div className="relative h-[150px] w-[150px] ">
-                            <Image
-                                src="/weather/animated/cloudy-day-1.svg" 
-                                alt="weather icon"
-                                fill
-                            ></Image>
+                        <div className="font-medium">{selectedForecast.area}</div>
+                        <div className="flex">
+                            <div >
+                                <Image
+                                    src={getWeatherIconPath(selectedForecast.forecast, 'animated')} 
+                                    alt="weather icon"
+                                    height={150}
+                                    width={150}
+                                ></Image>
+                            </div>
+                            <div className="flex flex-col justify-center">
+                                <div className="text-slate-600 font-semibold">{formatDate(new Date(date))}</div>
+                                <div className="font-semibold">{removeDayNight(selectedForecast?.forecast)}</div>     
+                            </div>
                         </div>
-                        <div>{selectedForecast?.forecast}</div>     
                     </>
                 }
             </div>
