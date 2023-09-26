@@ -4,6 +4,7 @@ import Image from "next/image"
 import { Compass, Droplets, LucideProps, Thermometer, Wind, icons } from "lucide-react";
 import { useEffect, useState } from "react";
 import { getWeatherForecasts } from "./service";
+import { getWeatherIconPath, removeDayNight } from "./utils";
 
 
 
@@ -33,101 +34,89 @@ interface Period {
 }
 
 
-const general = {
-    forecast: "Fair (Day)",
-    relative_humidity: {
-        low: 55,
-        high: 85
-    },
-    temperature: {
-        low: 25,
-        high: 34
-    },
-    wind: {
-        speed: {
-            low: 10,
-            high: 30
-        },
-        direction: "S"
-    }
-}
-
-
-const periods = [{
-    forecast: "Sunny",
-    valid_time: {
-        start: new Date().toLocaleString(),
-        end: new Date().toLocaleString()
-    }
-},{
-    forecast: "Sunny",
-    valid_time: {
-        start: new Date().toLocaleString(),
-        end: new Date().toLocaleString()
-    } 
-},{
-    forecast: "Sunny",
-    valid_time: {
-        start: new Date().toLocaleString(),
-        end: new Date().toLocaleString()
-    } 
-},{
-    forecast: "Sunny",
-    valid_time: {
-        start: new Date().toLocaleString(),
-        end: new Date().toLocaleString()
-    } 
-}]
-
 interface TodayWeatherProps {
     date: Date,
     selectedLocation: Traffic | undefined,
 }
 
 export default function TodayWeather({ date, selectedLocation }: TodayWeatherProps) {
+    const [todayForecast, setTodayForecast] = useState<TodayForecast>()
 
-    function LucideIcon({ icon: Icon }: { icon: React.FC<LucideProps> }) {
-        const props = {size: 30, className:"stroke-slate-700 shrink-0"}
-        return <Icon {...props} />;
+    useEffect(() => {
+        getDailyForecasts(new Date(date))
+    }, [date])
+
+    async function getDailyForecasts(date: Date) {
+        const data = (await getWeatherForecasts('24-hour', undefined, date))
+        if (data) {
+            setTodayForecast(data[0])
+        }
     }
 
-    const observationChips = (title: string, value: string, icon: any) => {
+    const observations = [
+        {
+            title: "Temperature",
+            value: `${todayForecast?.general.temperature.low}\u00B0 - ${todayForecast?.general.temperature.high}\u00B0`,
+            icon: Thermometer
+        },
+        {
+            title: "Humidity",
+            value: `${todayForecast?.general.relative_humidity.low}% - ${todayForecast?.general.relative_humidity.high}%`,
+            icon: Droplets
+        },
+        {
+            title: "Wind Speed",
+            value: `${todayForecast?.general.wind.speed.low} - ${todayForecast?.general.wind.speed.high}km`,
+            icon: Wind
+        },
+        {
+            title: "Wind Direction",
+            value: todayForecast?.general.wind.direction,
+            icon: Compass
+        },
+    ]
 
-        return (
-            <div className="flex gap-3 items-center">
-                <LucideIcon icon={icon} />
+    const observationChips =  (
+        observations.map(obs => (
+            <div key={obs.title} className="flex gap-3 items-center">
+                <obs.icon size={30} className="stroke-slate-700 shrink-0"/>
                 <div>
-                    <div className="text-xs text-slate-600 whitespace-nowrap">{title}</div>
-                    <span className="text-sm font-semibold whitespace-nowrap">{value}</span>
+                    <div className="text-xs text-slate-600">{obs.title}</div>
+                    <span className="text-sm font-semibold">{obs.value}</span>
                 </div>
             </div>
-        )
-    }
+        ))
+    )
 
     return (
         <div className="w-full p-5 flex flex-col gap-5">
-            <div className="text-base font-semibold">Today</div>
-            <div id="periods" className="grid grid-cols-4 justify-between">
-                {periods.map((period, i) => (
-
-                    <div key={i} className="flex flex-col items-center min-w-[80px]">
-                        <Image
-                            src="/weather/static/cloudy-night-1.svg" 
-                            alt="weather icon"
-                            height={100}
-                            width={100}
-                        ></Image>
-                        <div className="text-sm text-slate-800 font-medium">{formatDate(period.valid_time.start)}</div>
-                        <div className="text-sm text-slate-500">{period.forecast}</div>
+            <div className="flex text-base font-semibold items-end">
+                <span>Today</span>
+                {todayForecast && 
+                    <span className="ml-auto text-sm text-slate-500">{formatDate(date, 'MM DD')}</span>
+                }
+            </div>
+            {todayForecast &&
+                <>
+                    <div id="periods" className="grid grid-cols-3 justify-between">
+                        {todayForecast?.periods.map((period, i) => (
+                            <div key={i} className="flex flex-col items-center min-w-[80px]">
+                                <Image
+                                    src={getWeatherIconPath(period.regions[selectedLocation?.region ?? 'central'], 'animated')}
+                                    alt="weather icon"
+                                    height={100}
+                                    width={100}
+                                ></Image>
+                                <div className="text-sm text-center text-slate-800 font-medium">{formatDate(period.time.start)}</div>
+                                <div className="text-sm text-center text-slate-500">{removeDayNight(period.regions[selectedLocation?.region ?? 'central'])}</div>
+                            </div>
+                        ))}
                     </div>
-                ))}
-            </div>
-            <div id="info" className="grid grid-cols-2 gap-5">
-                {observationChips("Temperature", `${general.temperature.low}\u00B0 - ${general.temperature.high}\u00B0`, Thermometer)}
-                {observationChips("Humidity", `${general.relative_humidity.low}% - ${general.relative_humidity.high}%`, Droplets)}
-                {observationChips("Wind Speed", `${general.wind.speed.low} - ${general.wind.speed.high}km`, Wind)}
-                {observationChips("Wind Direction", general.wind.direction, Compass)}
-            </div>
+                    <div id="info" className="grid grid-cols-2 gap-5">
+                        {observationChips}
+                    </div>
+                </>
+            }
         </div>
     )
 }
