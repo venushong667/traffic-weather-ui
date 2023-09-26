@@ -16,7 +16,7 @@ export default function WeatherModule({ date, selectedLocation }: WeatherModuleP
         <div className="flex flex-col overflow-y-visible">
             <div className="text-xl font-semibold mt-5 ml-5">Weather</div>
             <CurrentWeather date={date} selectedLocation={selectedLocation} />
-            <Separator />
+            {selectedLocation && <Separator />}
             <TodayWeather date={date} selectedLocation={selectedLocation} />
             <div className="my-1"></div>
             <FutureWeather date={date} />
