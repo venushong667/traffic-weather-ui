@@ -5,29 +5,9 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useEffect, useRef, useState } from "react";
 import { getWeatherForecasts } from "./service";
-import { Observation } from "./interface";
+import { FutureForecast, Observation } from "./interface";
 import { getWeatherIconPath } from "./utils";
 
-
-interface FutureForecast {
-    forecasts: Forecast[]
-}
-
-interface Forecast extends Observation {
-    date: string,
-    forecast: string
-}
-
-enum ForecastType {
-    cloudy = 'cloudy',
-    light_rain = 'light rain',
-    light_showers = 'light showers',
-    moderate_rain = 'moderate rain',
-    windy = 'windy',
-    showers = 'showers',
-    thundery_showers = 'thundery showers',
-    fair = 'fair'
-}
 
 interface FutureWeatherProps {
     date: Date
@@ -36,8 +16,8 @@ interface FutureWeatherProps {
 export default function FutureWeather({ date }: FutureWeatherProps) {
     const [futureForecasts, setFutureForecasts] = useState<FutureForecast>()
     const forecastListRef = useRef<HTMLDivElement>(null);
-    const [canScroll, setCanScroll] = useState({ right: true, left: false })
-
+    const [canScroll, setCanScroll] = useState({ right: false, left: false })
+    
     useEffect(() => {
         getFutureForecasts(date)
     }, [date])
@@ -46,6 +26,7 @@ export default function FutureWeather({ date }: FutureWeatherProps) {
         const data = (await getWeatherForecasts('4-day', date))
         if (data) {
             setFutureForecasts(data[0])
+            setCanScroll({ right: true, left: false })
         }
     }
     

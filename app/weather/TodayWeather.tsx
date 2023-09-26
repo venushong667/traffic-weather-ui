@@ -5,20 +5,7 @@ import { Compass, Droplets, Thermometer, Wind } from "lucide-react";
 import { useEffect, useState } from "react";
 import { getWeatherForecasts } from "./service";
 import { getWeatherIconPath, removeDayNight } from "./utils";
-import { Observation } from "./interface";
-
-interface TodayForecast {
-    valid_period: { start: string, end: string }
-    general: Observation,
-    periods: Period[]
-}
-
-interface Period {
-    time: { start: string, end: string },
-    regions: {
-        [region: string]: string,
-    }
-}
+import { DailyForecast } from "./interface";
 
 
 interface TodayWeatherProps {
@@ -27,7 +14,7 @@ interface TodayWeatherProps {
 }
 
 export default function TodayWeather({ date, selectedLocation }: TodayWeatherProps) {
-    const [todayForecast, setTodayForecast] = useState<TodayForecast>()
+    const [todayForecast, setTodayForecast] = useState<DailyForecast>()
 
     useEffect(() => {
         getDailyForecasts(new Date(date))

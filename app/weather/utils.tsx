@@ -1,14 +1,4 @@
-enum ForecastType {
-    thundery_showers = 'thundery showers',
-    light_showers = 'light showers',
-    light_rain = 'light rain',
-    moderate_rain = 'moderate rain',
-    partly_cloudy = 'partly cloudy',
-    windy = 'windy',
-    showers = 'showers',
-    fair = 'fair',
-    cloudy = 'cloudy',
-}
+import { ForecastType } from "./interface"
 
 export function getWeatherIconPath(forecastType: string, svgType: 'animated' | 'static') {
     const type = forecastType.toLowerCase().trim()
