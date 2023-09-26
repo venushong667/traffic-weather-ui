@@ -4,19 +4,7 @@ import { Traffic } from "../traffic/TrafficModule"
 import Image from "next/image"
 import { formatDate } from "@/lib/utils"
 import { getWeatherIconPath, removeDayNight } from "./utils"
-
-
-interface HourlyForecast {
-    update_timestamp: string,
-    timestamp: string,
-    valid_period: { start: string, end: string }
-    forecasts: Forecast[]
-}
-
-interface Forecast {
-    area: string,
-    forecast: string,
-}
+import { AreaForecast, HourlyForecast } from "./interface"
 
 interface CurrentWeatherProps {
     date: Date,
@@ -25,7 +13,7 @@ interface CurrentWeatherProps {
 
 export default function CurrentWeather({ date, selectedLocation }: CurrentWeatherProps) {
     const [hourlyForecasts, setHourlyForecasts] = useState<HourlyForecast>()
-    const [selectedForecast, selectForecast] = useState<Forecast>()
+    const [selectedForecast, selectForecast] = useState<AreaForecast>()
 
     useEffect(() => {
         getHourlyForecasts(date)
@@ -43,7 +31,7 @@ export default function CurrentWeather({ date, selectedLocation }: CurrentWeathe
         }
     }
 
-    function handleLocationChange(forecasts: Forecast[] | undefined, neighborhood: string | undefined) {
+    function handleLocationChange(forecasts: AreaForecast[] | undefined, neighborhood: string | undefined) {
         if (!forecasts || !neighborhood) return
 
         const currForecast = forecasts.find(forecast => forecast.area === neighborhood)
