@@ -4,51 +4,39 @@ import React, { useEffect, useState } from "react";
 
 import { ColumnDef, Row } from "@tanstack/react-table";
 import { getTraffic } from "./service";
-import { DataTable } from "@/components/data-table";
-import { DataTableColumnHeader } from "@/components/data-table/data-table-column-header";
 import { Traffic } from "./TrafficModule";
+import { DateTime } from "luxon";
+import { DataList } from "@/components/data-table/data-list";
 
 
 const columns: ColumnDef<Traffic>[] = [
     {
         accessorKey: "address",
-        header: ({ column }) => (
-            <DataTableColumnHeader column={column} title="Address" hide={false} />
+        cell: ({ row }) => (
+            <div id="row" className="flex items-center">
+                <div className="cursor-pointer">
+                    {row.getValue("address")}
+                    <div className="text-xs text-slate-500">{row.getValue("route")}, {row.getValue("neighborhood")}</div>
+                </div>
+            </div>
         ),
         meta: { search: true }
     },
     {
         accessorKey: "route",
-        header: ({ column }) => (
-            <DataTableColumnHeader column={column} title="Route" hide={false} />
-        ),
+        cell: undefined,
         meta: { search: true }
     },
     {
         accessorKey: "neighborhood",
-        header: ({ column }) => (
-            <DataTableColumnHeader column={column} title="Area" hide={false} />
-        ),
-        cell: ({ row }) => <div className="w-full max-w-[150px] truncate">{row.getValue("neighborhood")}</div>,
-        meta: { filter: true }
-    },
-    {
-        accessorKey: "region",
-        header: ({ column }) => (
-            <DataTableColumnHeader column={column} title="Region" hide={false} />
-        ),
-        cell: ({ row }) => {
-            const value = row.getValue<string>("region")
-            return <div className="w-[40px]">{ value.substring(0 ,1).toUpperCase() + value.substring(1) }</div>
-        },
+        cell: undefined,
         meta: { filter: true }
     },
     {
         accessorKey: "timestamp",
-        header: ({ column }) => (
-            <DataTableColumnHeader column={column} title="Updated at" hide={false} />
-        ),
-        cell: ({ row }) => <div className="w-[100px] max-w-[100px]">{new Date(row.getValue<string>("timestamp")).toLocaleTimeString()}</div>,
+        cell: ({ row }) => <div className="w-[100px] max-w-[100px] ml-auto ">
+            {DateTime.fromJSDate(new Date(row.getValue("timestamp"))).toFormat("HH:mm a")}
+        </div>,
     },
 ]
 
@@ -76,13 +64,12 @@ export default function LocationTable( { date, selectedLocation, selectLocation 
     }
 
     return (
-        <div id="location-list" className="bg-slate-50 dark:bg-slate-900 rounded-lg p-8">
-            <DataTable
+        <div className="flex flex-col gap-2">
+            <div className="font-bold text-blue-700 dark:text-blue-200">Locations</div>
+            <DataList
                 columns={columns}
                 data={traffic}
-                initialTableState={{ pagination: { pageSize: 5 } }}
                 onSelectRow={onSelectRow}
-                enableSetPageSize={false}
                 enableViewOptions={false}
             />
         </div>
