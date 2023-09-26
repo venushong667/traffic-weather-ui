@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { getWeatherForecasts } from "./service"
 import { Traffic } from "../traffic/TrafficModule"
 import Image from "next/image"
+import { formatDate } from "@/lib/utils"
 
 
 interface HourlyForecast {
@@ -51,19 +52,20 @@ export default function CurrentWeather({ date, selectedLocation }: CurrentWeathe
 
     return (
         <>
-            <div className="p-5 flex flex-col gap-1">
-                Current Weather
+            <div id="current-weather" className="p-5 flex flex-col w-full gap-1">
+                <div className="text-xl font-semibold">Weather Now</div>
                 
                 {selectedForecast && hourlyForecasts && 
                     <>
-                        <div>{new Date().toLocaleTimeString()}</div>
+                        <div>{formatDate(new Date())}</div>
                         <div>{selectedForecast.area}</div>
-                        <Image
-                            src="/weather/animated/cloudy-day-1.svg" 
-                            alt="weather icon"
-                            height={100}
-                            width={100}
-                        ></Image>
+                        <div className="relative h-[150px] w-[150px] ">
+                            <Image
+                                src="/weather/animated/cloudy-day-1.svg" 
+                                alt="weather icon"
+                                fill
+                            ></Image>
+                        </div>
                         <div>{selectedForecast?.forecast}</div>     
                     </>
                 }
