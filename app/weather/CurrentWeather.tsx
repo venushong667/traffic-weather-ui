@@ -41,10 +41,10 @@ export default function CurrentWeather({ date, selectedLocation }: CurrentWeathe
     return (
         <>
             <div id="current-weather" className="pt-3 px-5 flex flex-col w-full gap-1">
-                <div className="text-base font-semibold">Now</div>
                 
                 {selectedForecast && hourlyForecasts && 
                     <>
+                        <div className="text-base font-semibold">Now</div>
                         <div className="font-medium">{selectedForecast.area}</div>
                         <div className="flex">
                             <div >
