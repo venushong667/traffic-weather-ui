@@ -14,16 +14,17 @@ export default function CameraImage({ selectedLocation }: CameraImageProps) {
     }
 
     return (
-        <div id="camera-image" className="flex h-full justify-center items-center overflow-hidden relative bg-slate-50 dark:bg-slate-900 rounded-lg">
+        <div id="camera-image" className="h-full min-h-[300px] relative g-slate-50 bg-slate-50 dark:bg-slate-900 rounded-lg">
             <Image
                 loader={imageLoader}
                 src="/image-placeholder.jpg"
                 alt=""
                 priority={true}
                 quality={100}
-                width={300}
-                height={300}
-                style={{width: 'auto', height: '100%'}}
+                fill
+                style={{
+                    objectFit: 'contain'
+                }}
             ></Image>
         </div>
     )

@@ -17,11 +17,17 @@ export default function TodayWeather({ date, selectedLocation }: TodayWeatherPro
     const [todayForecast, setTodayForecast] = useState<DailyForecast>()
 
     useEffect(() => {
+        if (!date) return
         getDailyForecasts(new Date(date))
     }, [date])
 
     async function getDailyForecasts(date: Date) {
-        const data = (await getWeatherForecasts('24-hour', undefined, date))
+        let dateParam: Date | undefined = date;
+        // Prevent 24-hour API getting empty forecast during midnight time
+        if (date.toDateString() === new Date().toDateString()) {
+            dateParam = undefined;
+        }
+        const data = (await getWeatherForecasts('24-hour', undefined, dateParam))
         if (data) {
             setTodayForecast(data[0])
         }
@@ -55,25 +61,25 @@ export default function TodayWeather({ date, selectedLocation }: TodayWeatherPro
             <div key={obs.title} className="flex gap-3 items-center">
                 <obs.icon size={30} className="stroke-slate-700 shrink-0"/>
                 <div>
-                    <div className="text-xs text-slate-600">{obs.title}</div>
-                    <span className="text-sm font-semibold">{obs.value}</span>
+                    <div className="text-xs text-slate-600 whitespace-nowrap">{obs.title}</div>
+                    <span className="text-sm font-semibold whitespace-nowrap">{obs.value}</span>
                 </div>
             </div>
         ))
     )
 
     return (
-        <div className="w-full p-5 flex flex-col gap-5">
-            <div className="flex text-base font-semibold items-end">
+        <div className="w-full min-w-fit p-5 flex flex-col gap-5">
+            <div className="flex mobile:flex-col text-base font-semibold items-end mobile:items-start">
                 <span>Today</span>
                 {todayForecast && 
-                    <span className="ml-auto text-sm text-slate-500">{formatDate(date, 'MM DD')}</span>
+                    <span className="ml-auto mobile:ml-0 text-sm text-slate-500">{formatDate(date, 'MM DD')}</span>
                 }
             </div>
-            {todayForecast &&
+            {todayForecast && todayForecast?.periods.length > 0 &&
                 <>
-                    <div id="periods" className="grid grid-cols-3 justify-between">
-                        {todayForecast?.periods.map((period, i) => (
+                    <div id="periods" className="grid grid-cols-3 justify-between min-w-fit">
+                        {todayForecast?.periods.slice(0, 3).map((period, i) => (
                             <div key={i} className="flex flex-col items-center min-w-[80px]">
                                 <Image
                                     src={getWeatherIconPath(period.regions[selectedLocation?.region ?? 'central'], 'animated')}

@@ -5,7 +5,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useEffect, useRef, useState } from "react";
 import { getWeatherForecasts } from "./service";
-import { FutureForecast, Observation } from "./interface";
+import { FutureForecast } from "./interface";
 import { getWeatherIconPath } from "./utils";
 
 
@@ -44,24 +44,26 @@ export default function FutureWeather({ date }: FutureWeatherProps) {
             left: deltaXAfterScroll
         })
 
+        const scrollable = forecastListRef.current.scrollWidth - forecastListRef.current.clientWidth !== 0
+        
         setCanScroll({
-            left: deltaXAfterScroll >= 0,
-            right: deltaXAfterScroll <= forecastListRef.current.scrollWidth - forecastListRef.current.clientWidth
+            left: scrollable && deltaXAfterScroll >= 0,
+            right: scrollable && deltaXAfterScroll <= forecastListRef.current.scrollWidth - forecastListRef.current.clientWidth 
         })
     }
 
     return (
-        <div className="w-full p-5">
+        <div className="w-full p-5 mobile:min-w-fit laptop:min-w-full">
             <div className="text-base font-semibold mb-5">4 Day Forecasts</div>
-            <div className="relative">
+            <div className="relative mobile:w-fit laptop:w-auto">
                 {canScroll.left &&
                     <Button variant="outline" size="icon" className="absolute my-auto rounded-xl top-0 bottom-0 left-2 z-10" onClick={(e) => {scrollForecasts('right');e.preventDefault();}}>
                         <ChevronLeft className="h-4 w-4" />
                     </Button>
                 }
-                <div ref={forecastListRef} className="flex gap-2 w-full mr-5 relative scroll-smooth overflow-hidden">
+                <div ref={forecastListRef} className="mobile:grid mobile:grid-cols-2 laptop:flex gap-2 w-full mr-5 relative scroll-smooth overflow-hidden">
                     {futureForecasts?.forecasts.map(forecast => (
-                        <div key={forecast.date} className="grid justify-items-center border rounded-xl w-[120px] shrink-0 p-2">
+                        <div key={forecast.date} className="grid mobile:col-span-1 justify-items-center border rounded-xl w-[120px] shrink-0 p-2">
                             <div className="w-fit text-sm font-medium text-slate-700">{formatDate(forecast.date, 'MMM dd')}</div>
                             <Image
                                 src={getWeatherIconPath(forecast.forecast, 'static')}
