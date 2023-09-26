@@ -13,13 +13,19 @@ interface WeatherModuleProps {
 export default function WeatherModule({ date, selectedLocation }: WeatherModuleProps) {
 
     return (
-        <div className="flex flex-col overflow-y-visible">
+        <>
             <div className="text-xl font-semibold mt-5 ml-5">Weather</div>
-            <CurrentWeather date={date} selectedLocation={selectedLocation} />
-            {selectedLocation && <Separator />}
-            <TodayWeather date={date} selectedLocation={selectedLocation} />
-            <div className="my-1"></div>
-            <FutureWeather date={date} />
-        </div>
+            <div className="flex mobile:flex-row laptop:flex-col overflow-y-visible">
+                {selectedLocation && 
+                <>
+                    <CurrentWeather date={date} selectedLocation={selectedLocation} />
+                    <Separator className="mobile:hidden laptop:block"/>
+                </>
+                }
+                <TodayWeather date={date} selectedLocation={selectedLocation} />
+                <div className="my-1"></div>
+                <FutureWeather date={date} />
+            </div>
+        </>
     )
 }

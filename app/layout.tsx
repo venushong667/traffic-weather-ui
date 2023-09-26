@@ -19,16 +19,16 @@ export default function RootLayout({
     children: React.ReactNode
 }) {
     return (
-        <html lang="en">
-            <body className={inter.className}>
+        <html lang="en" className="h-full">
+            <body className={inter.className + ' h-full'}>
                 <ThemeProvider
                     attribute="class"
                     defaultTheme="system"
                     enableSystem
                     disableTransitionOnChange
                 >
-                    <div id="root" className="h-screen w-screen overflow-hidden">
-                        <div className="overflow-hidden h-full w-full">
+                    <div id="root" className="h-full w-full">
+                        <div className="overflow-x-hidden h-full w-full">
                             { children }
                         </div>
                     </div>

@@ -39,30 +39,28 @@ export default function CurrentWeather({ date, selectedLocation }: CurrentWeathe
     }
 
     return (
-        <>
-            <div id="current-weather" className="pt-3 px-5 flex flex-col w-full gap-1">
-                
-                {selectedForecast && hourlyForecasts && 
-                    <>
-                        <div className="text-base font-semibold">Now</div>
-                        <div className="font-medium">{selectedForecast.area}</div>
-                        <div className="flex">
-                            <div >
-                                <Image
-                                    src={getWeatherIconPath(selectedForecast.forecast, 'animated')} 
-                                    alt="weather icon"
-                                    height={150}
-                                    width={150}
-                                ></Image>
-                            </div>
-                            <div className="flex flex-col justify-center">
-                                <div className="text-slate-600 font-semibold">{formatDate(new Date(date))}</div>
-                                <div className="font-semibold">{removeDayNight(selectedForecast?.forecast)}</div>     
-                            </div>
+        <div id="current-weather" className="pt-3 px-5 flex flex-col w-full gap-1 min-w-fit">
+            
+            {selectedForecast && hourlyForecasts && 
+                <>
+                    <div className="text-base font-semibold">Now</div>
+                    <div className="font-medium">{selectedForecast.area}</div>
+                    <div className="flex mobile:flex-col laptop:flex-row">
+                        <div >
+                            <Image
+                                src={getWeatherIconPath(selectedForecast.forecast, 'animated')} 
+                                alt="weather icon"
+                                height={150}
+                                width={150}
+                            ></Image>
                         </div>
-                    </>
-                }
-            </div>
-        </>
+                        <div className="flex flex-col justify-center">
+                            <div className="text-slate-600 font-semibold whitespace-nowrap">{formatDate(new Date(date))}</div>
+                            <div className="font-semibold">{removeDayNight(selectedForecast?.forecast)}</div>     
+                        </div>
+                    </div>
+                </>
+            }
+        </div>
     )
 }
