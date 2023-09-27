@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { getWeatherForecasts } from "./service"
 import { Traffic } from "../traffic/TrafficModule"
 import Image from "next/image"
-import { formatDate } from "@/lib/utils"
+import { formatDate } from "../utils";
 import { getWeatherIconPath, removeDayNight } from "./utils"
 import { AreaForecast, HourlyForecast } from "./interface"
 

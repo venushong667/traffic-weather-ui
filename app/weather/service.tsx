@@ -1,4 +1,4 @@
-import { formatDate } from '@/lib/utils';
+import { formatDate } from "../utils";
 
 export type Duration = '2-hour' | '24-hour' | '4-day'
 

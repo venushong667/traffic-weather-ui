@@ -1,4 +1,4 @@
-import { formatDate } from "@/lib/utils";
+import { formatDate } from "../utils";
 import { Traffic } from "../traffic/TrafficModule";
 import Image from "next/image"
 import { Compass, Droplets, Thermometer, Wind } from "lucide-react";
