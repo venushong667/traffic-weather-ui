@@ -1,5 +1,4 @@
-import { formatDate } from "@/lib/utils";
-import { Traffic } from "../traffic/TrafficModule";
+import { formatDate } from "../utils";
 import Image from "next/image"
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
