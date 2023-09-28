@@ -3,26 +3,8 @@
 import React from "react";
 
 import CameraImage from "./CameraImage";
-import LocationTable from "./LocationTable";
-
-interface ImageMetadata {
-    height: number,
-    width: number,
-    md5: string
-}
-
-export interface Traffic {
-    id: string,
-    address: string,
-    route: string,
-    neighborhood: string,
-    region: string,
-    image: {
-        url: string,
-        metadata: ImageMetadata
-    },
-    timestamp: string
-}
+import { Traffic } from "./interfaces";
+import LocationList from "./LocationList";
 
 interface TrafficModuleProps {
     date: Date,
@@ -34,7 +16,7 @@ export default function TrafficModule({ date, selectedLocation, selectLocation }
 
     return (
         <>
-            <LocationTable
+            <LocationList
                 date={date}
                 selectLocation={selectLocation}
             />

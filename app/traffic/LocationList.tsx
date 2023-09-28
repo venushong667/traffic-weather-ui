@@ -6,8 +6,8 @@ import React, { useEffect, useState } from "react";
 
 import { DataList } from "@/components/data-table/data-list";
 
+import { Traffic } from "./interfaces";
 import { getTraffic } from "./service";
-import { Traffic } from "./TrafficModule";
 
 
 const columns: ColumnDef<Traffic>[] = [
@@ -37,7 +37,7 @@ interface LocationTableProps {
     selectLocation: React.Dispatch<React.SetStateAction<Traffic | undefined>>
 }
 
-export default function LocationTable( { date, selectLocation }: LocationTableProps) {
+export default function LocationList( { date, selectLocation }: LocationTableProps) {
     const [traffic, setTraffic] = useState<Traffic[]>([])
     const [isLoading, setLoading] = useState<boolean>(false)
 
@@ -59,7 +59,7 @@ export default function LocationTable( { date, selectLocation }: LocationTablePr
 
     return (
         <div className="flex flex-col gap-2">
-            <div className="font-bold text-blue-700 dark:text-blue-200">Locations</div>
+            <div className="font-bold">Locations</div>
             <DataList
                 columns={columns}
                 data={traffic}
