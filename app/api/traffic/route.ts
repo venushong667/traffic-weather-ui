@@ -13,6 +13,10 @@ export async function GET(request: NextRequest) {
         next: { revalidate: 600 }, // Revalidate every 600 seconds
     })
     const data = await res.json()
+
+    if(!res.ok) {
+        throw new Error(data)
+    }
  
     return NextResponse.json({ data })
 }
