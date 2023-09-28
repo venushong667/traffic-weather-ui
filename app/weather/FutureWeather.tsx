@@ -52,7 +52,7 @@ export default function FutureWeather({ date }: FutureWeatherProps) {
     }
 
     return (
-        <div className="w-full p-5 mobile:min-w-fit laptop:min-w-full">
+        <div id="forecast-weather" className="w-full p-5 mobile:min-w-fit laptop:min-w-full">
             <div className="text-base font-semibold mb-5">4 Day Forecasts</div>
             <div className="relative mobile:w-fit laptop:w-auto">
                 {canScroll.left &&

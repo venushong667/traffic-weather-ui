@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "cypress:open": "cypress open",
     "lint": "next lint",
     "lint-fix": "next lint --fix"
   },
@@ -45,6 +46,7 @@
     "typescript": "5.2.2"
   },
   "devDependencies": {
-    "@types/luxon": "^3.3.2"
+    "@types/luxon": "^3.3.2",
+    "cypress": "^13.3.0"
   }
 }
