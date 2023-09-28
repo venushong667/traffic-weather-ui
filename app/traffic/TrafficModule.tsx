@@ -1,8 +1,9 @@
 'use client'
 
-import React, { useState } from "react";
-import LocationTable from "./LocationTable";
+import React from "react";
+
 import CameraImage from "./CameraImage";
+import LocationTable from "./LocationTable";
 
 interface ImageMetadata {
     height: number,

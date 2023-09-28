@@ -1,10 +1,11 @@
 'use client'
 
 import React, { useState } from 'react'
+
 import { DatePicker } from '@/components/date-picker'
-import { ModeToggle } from '@/components/modeToggle'
-import TrafficModule, { Traffic } from './traffic/TrafficModule'
 import { Button } from '@/components/ui/button'
+
+import TrafficModule, { Traffic } from './traffic/TrafficModule'
 import WeatherModule from './weather/WeatherModule'
 
 

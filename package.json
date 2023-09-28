@@ -47,6 +47,7 @@
   },
   "devDependencies": {
     "@types/luxon": "^3.3.2",
-    "cypress": "^13.3.0"
+    "cypress": "^13.3.0",
+    "eslint-plugin-simple-import-sort": "^10.0.0"
   }
 }

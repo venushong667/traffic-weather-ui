@@ -1,13 +1,13 @@
 'use client'
 
+import { ColumnDef, Row } from "@tanstack/react-table";
+import { DateTime } from "luxon";
 import React, { useEffect, useState } from "react";
 
-import { ColumnDef, Row } from "@tanstack/react-table";
+import { DataList } from "@/components/data-table/data-list";
+
 import { getTraffic } from "./service";
 import { Traffic } from "./TrafficModule";
-import { DateTime } from "luxon";
-import { DataList } from "@/components/data-table/data-list";
-import { CircularLoading } from "@/components/circular-loading";
 
 
 const columns: ColumnDef<Traffic>[] = [

@@ -1,4 +1,4 @@
-import { NextResponse, type NextRequest } from 'next/server'
+import { type NextRequest,NextResponse } from 'next/server'
 
 const API_URL = process.env.API_URL
 

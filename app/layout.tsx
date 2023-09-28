@@ -1,7 +1,8 @@
 import './globals.css'
+
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import dynamic from 'next/dynamic'
+import { Inter } from 'next/font/google'
 
 // Resolve hydration warning of using attribute "class" and "style" that caused by the difference between React tree rendering
 const ThemeProvider = dynamic(() => import('@/components/theme-provider'), { ssr: false })

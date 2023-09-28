@@ -1,10 +1,12 @@
-import { formatDate } from "../utils";
-import Image from "next/image"
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import Image from "next/image"
 import { useEffect, useRef, useState } from "react";
-import { getWeatherForecasts } from "./service";
+
+import { Button } from "@/components/ui/button";
+
+import { formatDate } from "../utils";
 import { FutureForecast } from "./interface";
+import { getWeatherForecasts } from "./service";
 import { getWeatherIconPath } from "./utils";
 
 
