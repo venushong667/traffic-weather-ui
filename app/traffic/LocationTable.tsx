@@ -7,6 +7,7 @@ import { getTraffic } from "./service";
 import { Traffic } from "./TrafficModule";
 import { DateTime } from "luxon";
 import { DataList } from "@/components/data-table/data-list";
+import { CircularLoading } from "@/components/circular-loading";
 
 
 const columns: ColumnDef<Traffic>[] = [
@@ -38,6 +39,7 @@ interface LocationTableProps {
 
 export default function LocationTable( { date, selectLocation }: LocationTableProps) {
     const [traffic, setTraffic] = useState<Traffic[]>([])
+    const [isLoading, setLoading] = useState<boolean>(false)
 
     useEffect(() => {
         handleDateChange(date)
@@ -45,8 +47,10 @@ export default function LocationTable( { date, selectLocation }: LocationTablePr
     }, [date, selectLocation])
 
     async function handleDateChange(date: Date) {
+        setLoading(true)
         const data = await getTraffic(date) satisfies Traffic[] as Traffic[];
         setTraffic(data)
+        setLoading(false)
     }
 
     const onSelectRow = (row: Row<Traffic>) => {
@@ -61,6 +65,7 @@ export default function LocationTable( { date, selectLocation }: LocationTablePr
                 data={traffic}
                 onSelectRow={onSelectRow}
                 enableViewOptions={false}
+                isLoading={isLoading}
             />
         </div>
     )
