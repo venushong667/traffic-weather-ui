@@ -58,7 +58,7 @@ export default function TodayWeather({ date, selectedLocation }: TodayWeatherPro
 
     const observationChips =  (
         observations.map(obs => (
-            <div key={obs.title} className="flex gap-3 items-center">
+            <div key={obs.title} id="observation" className="flex gap-3 items-center">
                 <obs.icon size={30} className="stroke-slate-700 shrink-0"/>
                 <div>
                     <div className="text-xs text-slate-600 whitespace-nowrap">{obs.title}</div>
@@ -69,11 +69,11 @@ export default function TodayWeather({ date, selectedLocation }: TodayWeatherPro
     )
 
     return (
-        <div className="w-full min-w-fit p-5 flex flex-col gap-5">
+        <div id="today-weather" className="w-full min-w-fit p-5 flex flex-col gap-5">
             <div className="flex mobile:flex-col text-base font-semibold items-end mobile:items-start">
                 <span>Today</span>
                 {todayForecast && 
-                    <span className="ml-auto mobile:ml-0 text-sm text-slate-500">{formatDate(date, 'MM DD')}</span>
+                    <span className="ml-auto mobile:ml-0 text-sm text-slate-500">{formatDate(date, 'DD')}</span>
                 }
             </div>
             {todayForecast && todayForecast?.periods.length > 0 &&
