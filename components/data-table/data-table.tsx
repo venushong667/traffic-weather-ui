@@ -37,7 +37,9 @@ declare module '@tanstack/table-core' {
     // filter and search only can use one of each at the same time
     interface ColumnMeta<TData extends RowData, TValue> {
         filter?: boolean,
-        search?: boolean
+        search?: boolean,
+        class?: string,
+        placeholder?: string
     }
 }
 
