@@ -27,12 +27,12 @@ export function DataTableToolbar<TData>({
             return (
                 <Input
                     key={column.id}
-                    placeholder={searchPlaceholder ?? `Search ${column?.id}`}
+                    placeholder={searchPlaceholder ?? column.columnDef.meta.placeholder ?? `Search ${column?.id}`}
                     value={(column?.getFilterValue() as string) ?? ""}
                     onChange={(event) =>
                         column?.setFilterValue(event.target.value)
                     }
-                    className="h-8 w-[150px] lg:w-[250px]"
+                    className={"h-8 w-[150px] lg:w-[250px] " + column.columnDef.meta?.class}
                 />
             )
         } 

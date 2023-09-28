@@ -15,22 +15,13 @@ const columns: ColumnDef<Traffic>[] = [
         cell: ({ row }) => (
             <div id="row" className="flex items-center">
                 <div className="cursor-pointer">
-                    {row.getValue("address")}
-                    <div className="text-xs text-slate-500">{row.getValue("route")}, {row.getValue("neighborhood")}</div>
+                    {row.original.address}
+                    <div className="text-xs text-slate-500">{row.original.route.replace(", Singapore", "")}, {row.original.neighborhood}</div>
                 </div>
             </div>
         ),
-        meta: { search: true }
-    },
-    {
-        accessorKey: "route",
-        cell: undefined,
-        meta: { search: true }
-    },
-    {
-        accessorKey: "neighborhood",
-        cell: undefined,
-        meta: { filter: true }
+        meta: { search: true, class: "w-full max-w-[300px]", placeholder: "Search Location" },
+        accessorFn: row => `${row.address} ${row.route} ${row.neighborhood}`
     },
     {
         accessorKey: "timestamp",
@@ -42,11 +33,10 @@ const columns: ColumnDef<Traffic>[] = [
 
 interface LocationTableProps {
     date: Date,
-    selectedLocation: Traffic | undefined,
     selectLocation: React.Dispatch<React.SetStateAction<Traffic | undefined>>
 }
 
-export default function LocationTable( { date, selectedLocation, selectLocation }: LocationTableProps) {
+export default function LocationTable( { date, selectLocation }: LocationTableProps) {
     const [traffic, setTraffic] = useState<Traffic[]>([])
 
     useEffect(() => {
@@ -55,7 +45,7 @@ export default function LocationTable( { date, selectedLocation, selectLocation 
     }, [date, selectLocation])
 
     async function handleDateChange(date: Date) {
-        const data = await getTraffic(date)
+        const data = await getTraffic(date) satisfies Traffic[] as Traffic[];
         setTraffic(data)
     }
 

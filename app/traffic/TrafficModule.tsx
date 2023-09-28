@@ -35,7 +35,6 @@ export default function TrafficModule({ date, selectedLocation, selectLocation }
         <>
             <LocationTable
                 date={date}
-                selectedLocation={selectedLocation}
                 selectLocation={selectLocation}
             />
             <CameraImage selectedLocation={selectedLocation}/>
