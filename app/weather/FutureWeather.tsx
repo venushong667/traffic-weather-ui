@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 
 import { formatDate } from "../utils";
-import { FutureForecast } from "./interface";
+import { FutureForecast } from "./interfaces";
 import { getWeatherForecasts } from "./service";
 import { getWeatherIconPath } from "./utils";
 
@@ -65,14 +65,14 @@ export default function FutureWeather({ date }: FutureWeatherProps) {
                 <div ref={forecastListRef} className="mobile:grid mobile:grid-cols-2 laptop:flex gap-2 w-full mr-5 relative scroll-smooth overflow-hidden">
                     {futureForecasts?.forecasts.map(forecast => (
                         <div key={forecast.date} className="grid mobile:col-span-1 justify-items-center border rounded-xl w-[120px] shrink-0 p-2">
-                            <div className="w-fit text-sm font-medium text-slate-700">{formatDate(forecast.date, 'MMM dd')}</div>
+                            <div className="w-fit text-sm font-bold text-slate-500">{formatDate(forecast.date, 'MMM dd')}</div>
                             <Image
                                 src={getWeatherIconPath(forecast.forecast, 'static')}
                                 alt="weather icon"
                                 height={60}
                                 width={90}
                             ></Image>
-                            <div className="w-fit text-sm font-medium text-slate-700">{forecast.temperature.low}&deg; - {forecast.temperature.high}&deg;</div>
+                            <div className="w-fit text-sm font-semibold text-slate-700">{forecast.temperature.low}&deg; - {forecast.temperature.high}&deg;</div>
                         </div>
                     ))}
                 </div>

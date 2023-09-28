@@ -2,9 +2,9 @@ import { Compass, Droplets, Thermometer, Wind } from "lucide-react";
 import Image from "next/image"
 import { useEffect, useState } from "react";
 
-import { Traffic } from "../traffic/TrafficModule";
+import { Traffic } from "../traffic/interfaces";
 import { formatDate } from "../utils";
-import { DailyForecast } from "./interface";
+import { DailyForecast } from "./interfaces";
 import { getWeatherForecasts } from "./service";
 import { getWeatherIconPath, removeDayNight } from "./utils";
 

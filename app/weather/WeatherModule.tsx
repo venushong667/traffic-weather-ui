@@ -1,6 +1,6 @@
 import { Separator } from "@/components/ui/separator"
 
-import { Traffic } from "../traffic/TrafficModule"
+import { Traffic } from "../traffic/interfaces"
 import CurrentWeather from "./CurrentWeather"
 import FutureWeather from "./FutureWeather"
 import TodayWeather from "./TodayWeather"
@@ -15,7 +15,7 @@ export default function WeatherModule({ date, selectedLocation }: WeatherModuleP
 
     return (
         <>
-            <div className="text-xl font-semibold mt-5 ml-5">Weather</div>
+            <div className="text-xl font-bold mt-5 ml-5 dark:text-blue-200">Weather</div>
             <div className="flex mobile:flex-row laptop:flex-col overflow-y-visible">
                 {selectedLocation && 
                 <>

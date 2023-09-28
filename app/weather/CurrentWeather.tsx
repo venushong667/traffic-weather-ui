@@ -1,9 +1,9 @@
 import Image from "next/image"
 import { useEffect, useState } from "react"
 
-import { Traffic } from "../traffic/TrafficModule"
+import { Traffic } from "../traffic/interfaces";
 import { formatDate } from "../utils";
-import { AreaForecast, HourlyForecast } from "./interface"
+import { AreaForecast, HourlyForecast } from "./interfaces"
 import { getWeatherForecasts } from "./service"
 import { getWeatherIconPath, removeDayNight } from "./utils"
 
@@ -45,7 +45,8 @@ export default function CurrentWeather({ date, selectedLocation }: CurrentWeathe
             {selectedForecast && hourlyForecasts && 
                 <>
                     <div className="text-base font-semibold">Now</div>
-                    <div className="font-medium">{selectedForecast.area}</div>
+                    <div className="text-sm text-slate-500 font-semibold whitespace-nowrap">{formatDate(new Date(date))}</div>
+                    
                     <div className="flex mobile:flex-col laptop:flex-row">
                         <div >
                             <Image
@@ -55,9 +56,9 @@ export default function CurrentWeather({ date, selectedLocation }: CurrentWeathe
                                 width={150}
                             ></Image>
                         </div>
-                        <div className="flex flex-col justify-center">
-                            <div className="text-slate-600 font-semibold whitespace-nowrap">{formatDate(new Date(date))}</div>
-                            <div className="font-semibold">{removeDayNight(selectedForecast?.forecast)}</div>     
+                        <div className="flex flex-col justify-center font-medium">
+                            <div>{selectedForecast.area}</div>
+                            <div>{removeDayNight(selectedForecast?.forecast)}</div>     
                         </div>
                     </div>
                 </>

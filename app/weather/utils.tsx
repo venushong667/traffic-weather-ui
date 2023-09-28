@@ -1,4 +1,4 @@
-import { ForecastType } from "./interface"
+import { ForecastType } from "./interfaces"
 
 export function getWeatherIconPath(forecastType: string, svgType: 'animated' | 'static') {
     const type = forecastType.toLowerCase().trim()

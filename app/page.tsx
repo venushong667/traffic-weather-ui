@@ -5,7 +5,8 @@ import React, { useState } from 'react'
 import { DatePicker } from '@/components/date-picker'
 import { Button } from '@/components/ui/button'
 
-import TrafficModule, { Traffic } from './traffic/TrafficModule'
+import { Traffic } from './traffic/interfaces'
+import TrafficModule from './traffic/TrafficModule'
 import WeatherModule from './weather/WeatherModule'
 
 
@@ -29,7 +30,7 @@ export default function Home() {
 
                 <TrafficModule date={date} selectedLocation={selectedLocation} selectLocation={selectLocation} />
             </div>
-            <div id="weather" className="shadow mobile:overflow-x-auto mobile:min-h-[470px] laptop:overflow-visible laptop:min-h-[auto] laptop: mobile:col-span-3 laptop:col-span-1 ">
+            <div id="weather" className="shadow mobile:overflow-x-auto mobile:min-h-[470px] laptop:overflow-visible laptop:min-h-[auto] laptop: mobile:col-span-3 laptop:col-span-1">
                 <WeatherModule date={date} selectedLocation={selectedLocation} />
             </div>
 
