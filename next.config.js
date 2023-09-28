@@ -12,7 +12,7 @@ module.exports = async (phase) => {
     // when `next build` or `npm run build` is used
     // const isProd = phase === PHASE_PRODUCTION_BUILD && process.env.STAGING !== '1';
 
-    const API_URL = isDev ? "http://localhost:8080" : "http://traffic-weather:8080";
+    const API_URL = isDev ? "http://localhost:8080" : process.env.TRAFFIC_WEATHER_URL ?? "http://traffic-weather:8080";
     
     const nextConfig = {
         async rewrites() {
