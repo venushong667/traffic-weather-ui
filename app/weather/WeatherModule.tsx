@@ -1,8 +1,9 @@
-import CurrentWeather from "./CurrentWeather"
-import { Traffic } from "../traffic/TrafficModule"
 import { Separator } from "@/components/ui/separator"
-import TodayWeather from "./TodayWeather"
+
+import { Traffic } from "../traffic/TrafficModule"
+import CurrentWeather from "./CurrentWeather"
 import FutureWeather from "./FutureWeather"
+import TodayWeather from "./TodayWeather"
 
 
 interface WeatherModuleProps {

@@ -1,14 +1,10 @@
 "use client"
 
-import * as React from "react"
+import '@tanstack/react-table'
+
 import {
     ColumnDef,
     ColumnFiltersState,
-    InitialTableState,
-    Row,
-    RowData,
-    SortingState,
-    VisibilityState,
     flexRender,
     getCoreRowModel,
     getFacetedRowModel,
@@ -16,8 +12,14 @@ import {
     getFilteredRowModel,
     getPaginationRowModel,
     getSortedRowModel,
+    InitialTableState,
+    Row,
+    RowData,
+    SortingState,
     useReactTable,
+    VisibilityState,
 } from "@tanstack/react-table"
+import * as React from "react"
 
 import {
     Table,
@@ -30,8 +32,6 @@ import {
 
 import { DataTablePagination } from "./data-table-pagination"
 import { DataTableToolbar } from "./data-table-toolbar"
-
-import '@tanstack/react-table'
 
 declare module '@tanstack/table-core' {
     // filter and search only can use one of each at the same time

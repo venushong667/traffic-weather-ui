@@ -1,6 +1,8 @@
 {
+    "plugins": ["simple-import-sort"],
     "extends": "next/core-web-vitals",
     "rules": {
-        "indent": ["warn", 4]
+        "indent": ["warn", 4],
+        "simple-import-sort/imports": "warn"
     }
 }

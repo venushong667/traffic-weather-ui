@@ -1,11 +1,12 @@
-import { formatDate } from "../utils";
-import { Traffic } from "../traffic/TrafficModule";
-import Image from "next/image"
 import { Compass, Droplets, Thermometer, Wind } from "lucide-react";
+import Image from "next/image"
 import { useEffect, useState } from "react";
+
+import { Traffic } from "../traffic/TrafficModule";
+import { formatDate } from "../utils";
+import { DailyForecast } from "./interface";
 import { getWeatherForecasts } from "./service";
 import { getWeatherIconPath, removeDayNight } from "./utils";
-import { DailyForecast } from "./interface";
 
 
 interface TodayWeatherProps {

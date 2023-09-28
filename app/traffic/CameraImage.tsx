@@ -1,5 +1,6 @@
-import React from "react";
 import Image, { ImageLoaderProps } from "next/image"
+import React from "react";
+
 import { Traffic } from "./TrafficModule";
 
 interface CameraImageProps {
