@@ -13,12 +13,14 @@ export async function GET(request: NextRequest) {
             },
         })
         const data = await res.json()
-        // ToDo: data return { statusCode: 500, message: 'Internal server error' } instead of throw error
-        
+
+        if(!res.ok) {
+            throw new Error(data)
+        }
+
         return NextResponse.json({ data })
 
     } catch(error) {
-        console.log(error)
         throw error
     }
 }
