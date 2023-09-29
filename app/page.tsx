@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 
 import { DatePicker } from '@/components/date-picker'
+import { ModeToggle } from '@/components/modeToggle'
 import { Button } from '@/components/ui/button'
 
 import { Traffic } from './traffic/interfaces'
@@ -21,11 +22,10 @@ export default function Home() {
     return (
         <main className="h-full grid mobile:grid-cols-3 desktop:grid-cols-4 justify-between gap-5 overflow-auto">
             <div id="traffic" className="h-full flex flex-col mobile:col-span-3 laptop:col-span-2 desktop:col-span-3 gap-7 2xl:overflow-x-auto p-5">
-                <div id="top-bar" className="flex gap-3 flex-row flex-wrap">
+                <div id="top-bar" className="flex gap-3 flex-row flex-wrap relative translate-x-0 pr-[40px]">
                     <DatePicker date={date} setDate={handleDateChange}></DatePicker>
-                    <div>
-                        <Button onClick={() => setDate(new Date())}>Right Now!</Button>
-                    </div>
+                    <Button onClick={() => setDate(new Date())}>Right Now!</Button>
+                    <ModeToggle className="fixed right-0" />
                 </div>
 
                 <TrafficModule date={date} selectedLocation={selectedLocation} selectLocation={selectLocation} />

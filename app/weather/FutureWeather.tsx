@@ -72,7 +72,7 @@ export default function FutureWeather({ date }: FutureWeatherProps) {
                                 height={60}
                                 width={90}
                             ></Image>
-                            <div className="w-fit text-sm font-semibold text-slate-700">{forecast.temperature.low}&deg; - {forecast.temperature.high}&deg;</div>
+                            <div className="w-fit text-sm font-semibold text-slate-700 dark:text-slate-300">{forecast.temperature.low}&deg; - {forecast.temperature.high}&deg;</div>
                         </div>
                     ))}
                 </div>
