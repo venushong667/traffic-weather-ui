@@ -57,11 +57,11 @@ After image is built, please refer to the `docker-compose.yml` provided in `traf
 This project is make use of the following stack:
 - Next.js
 - TailwindCSS
-- Shadcn-ui
+- Shadcn/ui
 
 **Next.js** provides the features such as directory routing, server-side fetching, testing intergration, Image component on top of React. This improves the readability on the routing and the project structure, simplify the burdens to handle testing and image element. It also has more potential to further improve the project with SSR optimization, complex layout components and more.
 
-**TailwindCSS** is a library that take CSS into variable form, which provide a standardize styling across the project and provide simple screen breakpoint and dark mode integration.
+**TailwindCSS** is a library that take CSS into variable form, which provide a standardize styling across the project on the size naming ex. *sm, base, lg, xl* and provide simple screen breakpoint and dark mode integration.
 
-**Shadcn-ui** is a new component library that built on top of radix-ui and lucide. Compare to other component framework such as Mui, Shadcn-ui provide a very well accessibility and customization friendly that clone every components into your project `/components/ui` with their CLI. The component no longer access to `index.d.ts` only and open for any changes to provide the optimized UIUX to current project. (*Datetime picker and Data List components that used in this project is customized from other demo.*)
+**Shadcn/ui** is a new component library that built on top of radix-ui and lucide. Compare to other component framework such as Mui, Shadcn-ui provide a very well accessibility and customization friendly that clone every components into your project `/components/ui` with their CLI. The component no longer access to `index.d.ts` only and open for any changes to provide the optimized UIUX to current project. (*Datetime picker and Data List components that used in this project is customized from other demo.*)
 
