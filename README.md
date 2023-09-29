@@ -1,4 +1,4 @@
-# weather-and-traffic-app
+# Traffic Weather UI
 Weather Forecast &amp; Traffic Cam Website
 
 ## Cautions
