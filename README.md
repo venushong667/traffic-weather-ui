@@ -1,6 +1,16 @@
 # weather-and-traffic-app
 Weather Forecast &amp; Traffic Cam Website
 
+## Cautions
+
+- Ensure your PostgreSQL and `traffic-weather-service` are up before this UI. 
+If you have no local PostgreSQL server, please refer to the `docker-compose.yml` provided in the repo for easy db start up before starting any services.
+
+- If you're not going to run development server, build the [ui image](https://github.com/venushong667/traffic-weather-ui#build-docker-image) and continue to [traffic-weather-service](https://github.com/venushong667/traffic-weather-service).
+
+- You may experience a **slightly longer request time** for getting location list on the first time access, it is due to the cold start of service design that perform reverse geocoding for every unseen camera and store into db. The request speed would be normal after the initialize.
+
+
 ## Getting Started
 
 ### Run development server locally
