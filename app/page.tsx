@@ -24,7 +24,7 @@ export default function Home() {
             <div id="traffic" className="h-full flex flex-col mobile:col-span-3 laptop:col-span-2 desktop:col-span-3 gap-7 2xl:overflow-x-auto p-5">
                 <div id="top-bar" className="flex gap-3 flex-row flex-wrap relative translate-x-0 pr-[40px]">
                     <DatePicker date={date} setDate={handleDateChange}></DatePicker>
-                    <Button onClick={() => setDate(new Date())}>Right Now!</Button>
+                    <Button onClick={() => setDate(new Date())}>Now</Button>
                     <ModeToggle className="fixed right-0" />
                 </div>
 
