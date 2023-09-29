@@ -1,6 +1,6 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image"
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 
@@ -19,6 +19,22 @@ export default function FutureWeather({ date }: FutureWeatherProps) {
     const forecastListRef = useRef<HTMLDivElement>(null);
     const [canScroll, setCanScroll] = useState({ right: false, left: false })
     
+    useLayoutEffect(() => {
+        function updateCanScroll() {
+            if (!forecastListRef.current) return
+            const scrollLimit = forecastListRef.current.scrollWidth - forecastListRef.current.clientWidth
+
+            setCanScroll({
+                left: scrollLimit !== 0 && scrollLimit >= 0,
+                right: scrollLimit !== 0 && scrollLimit !== forecastListRef.current?.scrollLeft 
+            })
+        }
+        window.addEventListener('resize', updateCanScroll);
+        updateCanScroll();
+
+        return () => window.removeEventListener('resize', updateCanScroll);
+    }, []);
+
     useEffect(() => {
         getFutureForecasts(date)
     }, [date])
@@ -58,7 +74,7 @@ export default function FutureWeather({ date }: FutureWeatherProps) {
             <div className="text-base font-semibold mb-5">4 Day Forecasts</div>
             <div className="relative mobile:w-fit laptop:w-auto">
                 {canScroll.left &&
-                    <Button variant="outline" size="icon" className="absolute my-auto rounded-xl top-0 bottom-0 left-2 z-10" onClick={(e) => {scrollForecasts('right');e.preventDefault();}}>
+                    <Button variant="outline" size="icon" className="absolute my-auto rounded-xl top-0 bottom-0 left-2 z-10 bg-slate-50 dark:bg-slate-800 bg-opacity-70" onClick={(e) => {scrollForecasts('right');e.preventDefault();}}>
                         <ChevronLeft className="h-4 w-4" />
                     </Button>
                 }
@@ -69,7 +85,7 @@ export default function FutureWeather({ date }: FutureWeatherProps) {
                             <Image
                                 src={getWeatherIconPath(forecast.forecast, 'static')}
                                 alt="weather icon"
-                                height={60}
+                                height={90}
                                 width={90}
                             ></Image>
                             <div className="w-fit text-sm font-semibold text-slate-700 dark:text-slate-300">{forecast.temperature.low}&deg; - {forecast.temperature.high}&deg;</div>
@@ -77,7 +93,7 @@ export default function FutureWeather({ date }: FutureWeatherProps) {
                     ))}
                 </div>
                 {canScroll.right &&
-                    <Button variant="outline" size="icon" className="absolute my-auto rounded-xl top-0 bottom-0 right-2 z-10" onClick={(e) => {scrollForecasts('left');e.preventDefault();}}>
+                    <Button variant="outline" size="icon" className="absolute my-auto rounded-xl top-0 bottom-0 right-2 z-10 bg-slate-50 dark:bg-slate-800 bg-opacity-70" onClick={(e) => {scrollForecasts('left');e.preventDefault();}}>
                         <ChevronRight className="h-4 w-4" />
                     </Button>
                 }
