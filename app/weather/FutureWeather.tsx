@@ -25,7 +25,7 @@ export default function FutureWeather({ date }: FutureWeatherProps) {
             const scrollLimit = forecastListRef.current.scrollWidth - forecastListRef.current.clientWidth
 
             setCanScroll({
-                left: scrollLimit !== 0 && scrollLimit >= 0,
+                left: scrollLimit !== 0 && forecastListRef.current?.scrollLeft > 0,
                 right: scrollLimit !== 0 && scrollLimit !== forecastListRef.current?.scrollLeft 
             })
         }
