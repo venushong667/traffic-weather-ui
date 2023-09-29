@@ -73,5 +73,5 @@ This project is make use of the following stack:
 
 **TailwindCSS** is a library that take CSS into variable form, which provide a standardize styling across the project on the size naming ex. *sm, base, lg, xl* and provide simple screen breakpoint and dark mode integration.
 
-**Shadcn/ui** is a new component library that built on top of radix-ui and lucide. Compare to other component framework such as Mui, Shadcn-ui provide a very well accessibility and customization friendly that clone every components into your project `/components/ui` with their CLI. The component no longer access to `index.d.ts` only and open for any changes to provide the optimized UIUX to current project. (*Datetime picker and Data List components that used in this project is customized from other demo.*)
+**Shadcn/ui** is a new component library that built on top of radix-ui and lucide. Compare to other component framework such as Mui, Shadcn-ui provide a very well accessibility and customization friendly that clone every components into your project `/components/ui` with their CLI. The component no longer access to `index.d.ts` only and open for any changes to provide the optimized UIUX to current project. (*Datetime picker and Data List components that used in this project are customized components.*)
 
