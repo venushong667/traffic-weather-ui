@@ -1,5 +1,6 @@
 'use client'
 
+import { TimerReset } from 'lucide-react'
 import React, { useState } from 'react'
 
 import { DatePicker } from '@/components/date-picker'
@@ -9,7 +10,6 @@ import { Button } from '@/components/ui/button'
 import { Traffic } from './traffic/interfaces'
 import TrafficModule from './traffic/TrafficModule'
 import WeatherModule from './weather/WeatherModule'
-import { TimerReset } from 'lucide-react'
 
 
 export default function Home() {
