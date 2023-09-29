@@ -15,7 +15,7 @@ export default function WeatherModule({ date, selectedLocation }: WeatherModuleP
 
     return (
         <>
-            <div className="text-xl font-bold mt-5 ml-5 dark:text-blue-200">Weather</div>
+            <div className="text-xl font-bold mt-5 ml-5">Weather</div>
             <div className="flex mobile:flex-row laptop:flex-col overflow-y-visible">
                 {selectedLocation && 
                 <>

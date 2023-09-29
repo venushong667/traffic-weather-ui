@@ -139,7 +139,7 @@ export function DatePicker({
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                     <Input
-                        className="px-4 shadow-sm w-[200px]"
+                        className="px-4 shadow-sm w-[200px] h-[38px]"
                         type="time"
                         value={selectedDateTime ? selectedDateTime.toFormat("HH:mm") : undefined}
                         onChange={handleInputChange}

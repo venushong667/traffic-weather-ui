@@ -60,9 +60,9 @@ export default function TodayWeather({ date, selectedLocation }: TodayWeatherPro
     const observationChips =  (
         observations.map(obs => (
             <div key={obs.title} id="observation" className="flex gap-3 items-center">
-                <obs.icon size={30} className="stroke-slate-700 shrink-0"/>
+                <obs.icon size={30} className="stroke-slate-700 dark:stroke-slate-300 shrink-0"/>
                 <div>
-                    <div className="text-xs text-slate-600 whitespace-nowrap">{obs.title}</div>
+                    <div className="text-xs text-slate-600 dark:text-slate-400 whitespace-nowrap">{obs.title}</div>
                     <span className="text-sm font-semibold whitespace-nowrap">{obs.value}</span>
                 </div>
             </div>
@@ -88,7 +88,7 @@ export default function TodayWeather({ date, selectedLocation }: TodayWeatherPro
                                     height={100}
                                     width={100}
                                 ></Image>
-                                <div className="text-sm text-center text-slate-800 font-medium">{formatDate(period.time.start)}</div>
+                                <div className="text-sm text-center text-slate-800 dark:text-slate-200 font-medium">{formatDate(period.time.start)}</div>
                                 <div className="text-sm text-center text-slate-500">{removeDayNight(period.regions[selectedLocation?.region ?? 'central'])}</div>
                             </div>
                         ))}

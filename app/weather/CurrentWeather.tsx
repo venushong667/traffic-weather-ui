@@ -58,7 +58,7 @@ export default function CurrentWeather({ date, selectedLocation }: CurrentWeathe
                         </div>
                         <div className="flex flex-col justify-center font-medium">
                             <div>{selectedForecast.area}</div>
-                            <div>{removeDayNight(selectedForecast?.forecast)}</div>     
+                            <div className="text-slate-500">{removeDayNight(selectedForecast?.forecast)}</div>     
                         </div>
                     </div>
                 </>
